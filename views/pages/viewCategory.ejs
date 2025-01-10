@@ -1,0 +1,62 @@
+<%- include('../layout/headSection.ejs')%>
+
+<body>
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <div id="main-wrapper">
+        <%- include('../layout/header.ejs')%>
+        <%- include('../layout/sidebar.ejs')%>
+    <div class="page-wrapper">
+             <div class="page-breadcrumb">
+                <div class="row">
+                    <div class="col-12 d-flex no-block align-items-center">
+                        <h4 class="page-title">Dashboard</h4>
+                        <div class="ml-auto text-right">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                    <!-- <li class="breadcrumb-item active" aria-current="page">Library</li> -->
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-dark table-bordered table-active table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <% category.forEach((ele,index)=>{ %>
+                    <tr>
+                        <th scope="row"><%= index+1 %></th>
+                        <td><%= ele.Cat_name %></td>
+                        <td>
+                            <a href="/Cate/delete/<%= ele.id %>" class="btn-danger p-2 rounded">Delete</a>
+                            <a href="/Cate/update/<%= ele.id %>" class="btn-primary p-2 rounded" >Update</a>
+                        </td>
+                      </tr>
+               <% }) %>
+                 
+                </tbody>
+          </table>
+            <footer class="footer text-center">
+                All Rights Reserved by Matrix-admin. Designed and Developed by <a href="https://wrappixel.com">WrapPixel</a>.
+            </footer>
+        </div> 
+    
+    
+    </div>
+    <%- include('../layout/jsLinks.ejs') -%>
+    
+
+</body>
+
+</html>
