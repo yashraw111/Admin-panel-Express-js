@@ -1,38 +1,43 @@
 const express = require("express");
 const app = express();
-require("dotenv").config();
-const PORT = process.env.PORT || 3000;
-app.set("view engine ","ejs")
-app.use(express.static('public'))
-app.use(express.json())
-app.use(express.urlencoded({extended:true}))
-const Router = require('./Routes/Category.routes');
-const { default: mongoose } = require("mongoose");
-const CategoryModel = require('./model/Category.model')
+const PORT = 8000;
+app.set("view engine", "ejs");
 
-app.get("/", (req, res) =>{
-  res.render('pages/index.ejs')
-});
-app.get("/addCategory", (req, res) =>{
-  res.render('pages/addCategory.ejs')
-});
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
+app.use(express.json());
+const router = require("./routes/cat_route");
+
+const categoryModel=require('./model/catModel')
+
+const mongoose = require("mongoose");
+const MONGO_URL = "mongodb://localhost:27017/Cat"; 
+main()
+  .then(() => {
+    console.log("db connected");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+async function main() {
+  await mongoose.connect(MONGO_URL);
+}
+
+app.get('/addCategory',(req,res)=>{
+  res.render('pages/addCategory')
+})
 
 app.get('/viewCategory',async(req,res)=>{
-
-  const category = await  CategoryModel.find()
-  // console.log(category);
-  
-  res.render('pages/viewCategory.ejs',{category})
-})
-mongoose.connect("mongodb://localhost:27017/Category")
-.then(()=>{
-  console.log("db Connected ...");
-})
-.catch((err)=>{
-  console.log(err);
+  const category=await categoryModel.find()
+  res.render('pages/viewCategory',{category})
 })
 
-app.use('/Cate',Router)
-app.listen(PORT, () =>
-  console.log(`Example app listening on port http://localhost:${PORT}`)
-);
+app.get("/updateCategory",async(req,res)=>{
+  const {id}=req.query
+  const category=await categoryModel.findById(id)
+  res.render('pages/updateCategory',{category})
+})
+
+app.use("/api", router);
+app.get("/", (req, res) => res.render("pages/index"));
+app.listen(PORT, () => console.log(`Example app listening on PORT ${PORT}!`));
