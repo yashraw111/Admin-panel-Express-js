@@ -2,8 +2,8 @@ const Category = require("../model/catModel");
 exports.store = async (req, res) => {
   try {
     const { cat_name } = req.body;
-    const existcat = await Category.findOne({ cat_name }).countDocuments();
-    if (existcat) {
+    const existCat = await Category.findOne({ cat_name }).countDocuments();
+    if (existCat) {
       res.json({
         success: true,
         message: "already exist",
@@ -23,7 +23,7 @@ exports.trash=async(req,res)=>{
   try{
     const {id}=req.params
     await Category.findByIdAndDelete(id)
-    res.json("deleted")
+    res.redirect("/viewCategory")
   }catch(err){
    res.json(err)
   }
