@@ -16,7 +16,12 @@ exports.store = async (req, res) => {
       });
     }
   } catch (err) {
-    console.log(err);
+    // console.log(err);
+    var error = err._message
+    res.json({
+      success:true,
+      error
+    })
   }
 };
 exports.trash=async(req,res)=>{

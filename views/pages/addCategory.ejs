@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
   <%- include('../layout/headSection') %>
-
   <body>
     <div class="preloader">
       <div class="lds-ripple">
@@ -16,7 +15,7 @@
 
       <div class="page-wrapper">
         <div class="page-breadcrumb">
-          <div class="row">
+          <!-- <div class="row">
             <div class="col-12 d-flex no-block align-items-center">
               <h4 class="page-title">Dashboard</h4>
               <div class="ml-auto text-right">
@@ -30,21 +29,20 @@
                 </nav>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
         <form class="form-horizontal" method="post" action="api/addCategory">
           <div class="card-body">
-              <h4 class="card-title">Personal Info</h4>
-              <div class="form-group row">
-                  <label for="fname" class="col-sm-3 text-right control-label col-form-label">Category</label>
-                  <div class="col-sm-9">
-                      <input type="text" class="form-control" id="fname" placeholder="First Name Here" name="cat_name">
+              <h4 class="card-title">Add Category</h4>
+              <div class="form-group ">
+                  <div class="col-sm-9 mt-3">
+                      <input type="text" class="form-control" id="fname" placeholder="Enter Category Name " name="cat_name">
                   </div>
               </div>
              
           </div>
               <div class="card-body">
-                  <button class="btn btn-primary">Submit</button>
+                  <button class="btn btn-github">Submit</button>
               </div>
       </form>
         <footer class="footer text-center">
