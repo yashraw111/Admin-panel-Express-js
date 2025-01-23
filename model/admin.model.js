@@ -11,7 +11,7 @@ const AdminSchema = new Schema(
     email: common,
     password: {
       ...common,
-      type: Number,
+      type: String,
     },
   },
   {
