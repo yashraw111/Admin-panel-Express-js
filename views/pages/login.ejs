@@ -27,6 +27,14 @@
                     <div class="text-center p-t-20 p-b-20">
                         <span class="db"><img src="assets/images/logo.png" alt="logo" /></span>
                     </div>
+
+                    <% if(message){ %>
+                    <% console.log(message[0]) %>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong> <%= message[0] %> </strong> 
+                        <!-- <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> -->
+                      </div>
+                      <% }%>
                     <form class="form-horizontal m-t-20" id="loginform" method="post" action="api/admin/loginUser">
                         <div class="row p-b-30">
                             <div class="col-12">

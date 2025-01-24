@@ -13,6 +13,7 @@ const AdminSchema = new Schema(
       ...common,
       type: String,
     },
+    admin_profile:String
   },
   {
     timeStamps: true,

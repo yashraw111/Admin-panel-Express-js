@@ -1,5 +1,6 @@
 const router = require("express").Router();
 
+const Admin = require("../model/admin.model");
 const categoryModel = require("../model/catModel");
 const { accessPage } = require("../utils/AccessPage");
 
@@ -28,24 +29,21 @@ router.get("/register", async (req, res) => {
   res.render("pages/register");
 });
 router.get("/login", async (req, res) => {
-  res.render("pages/login");
+  res.render("pages/login",{message:req.flash("info")});
 });
 router.get('/logout',async(req,res)=>{
   res.clearCookie("admin")
   res.redirect('/login')
-})
+})  
 
 router.get("/myprofile",async(req,res)=>{
   const cookiesAdmin = req.cookies.admin
   // console.log(cookies);
   const email = cookiesAdmin.email
-  console.log(email);
-  const SingleAdmin= await categoryModel.findOne({email})
-  console.log(SingleAdmin);
-  
-  
-  
-  res.render('pages/MyProfile')
+  // console.log(email);
+  const SingleAdmin= await Admin.findOne({email})
+  // console.log(SingleAdmin);
+  res.render('pages/MyProfile',{admin:SingleAdmin})
 })
 
 module.exports = router;

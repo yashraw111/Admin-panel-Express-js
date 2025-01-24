@@ -12,18 +12,29 @@
 <%- include('../layout/header') %>
 <%- include('../layout/sidebar') %>
 
+<% console.log(admin) %>
 
       <div class="page-wrapper">
         <div class="page-breadcrumb">
-       
         </div>
-        <form class="form-horizontal" method="post" action="api/addCategory">
+        <div class="div d-flex w-100 justify-content-center">
+        <img src="profile/<%= admin.admin_profile %>" alt="" width="100" class="rounded-circle">
+      </div>
+        <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/api/admin/UpdateProfile">
           <div class="card-body">
               <h4 class="card-title">Add Category</h4>
               <div class="form-group ">
                   <div class="col-sm-9 mt-3">
-                      <input type="text" class="form-control" id="fname" placeholder="Enter Category Name " name="cat_name">
+                      <input type="text" class="form-control" id="fname" value="<%= admin.userName %>" placeholder="Enter Category Name " name="userName">
                   </div>
+                  <div class="col-sm-9 mt-3">
+                      <input type="text" class="form-control border-dark" id="fname" value="<%= admin.email %>" placeholder="Enter Category Name " name="username" disabled>
+                  </div>
+                  <input type="hidden" value="<%= admin.email %>" name="email">
+                  <div class="col-sm-9 mt-3">
+                      <input type="file" class="form-control border-dark" id="fname" name="admin_profile" >
+                  </div>
+               
               </div>
              
           </div>
