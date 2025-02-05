@@ -33,7 +33,6 @@ exports.trash=async(req,res)=>{
    res.json(err)
   }
 }
-
 exports.update=async(req,res)=>{
   try{
     const {id}=req.params

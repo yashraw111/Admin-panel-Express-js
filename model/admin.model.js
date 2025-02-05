@@ -4,7 +4,7 @@ const common = {
   required: true,
   unique: true,
   trim: true,
-}
+};
 const AdminSchema = new Schema(
   {
     userName: common,
@@ -13,7 +13,8 @@ const AdminSchema = new Schema(
       ...common,
       type: String,
     },
-    admin_profile:String
+    admin_profile: String,
+    token: String,
   },
   {
     timeStamps: true,
