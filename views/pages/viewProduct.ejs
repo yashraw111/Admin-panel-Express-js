@@ -38,18 +38,25 @@
                       <th scope="col">#</th>
                       <th scope="col">Category name</th>
                       <th scope="col">Sub category</th>
+                      <th scope="col">Product name</th>
+                      <th scope="col">Product price</th>
+                      <th scope="col">View Image</th>
                       <th scope="col">Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <% category.forEach((ele,index)=>{ %> 
+                    <% Product.forEach((ele,index)=>{ %> 
                       <tr>
                         <td><%= index+1  %></td>
-                        <td><%= ele?.cat_name?.cat_name %></td>
-                        <td><%= ele?.sub_category %></td>
+                        <td><%= ele?.category?.cat_name %></td>
+                        <td><%= ele?.subCategory?.sub_category %></td>
+                        <td><%= ele?.pr_name %></td>
+                        <td><img src="profile/product/<%= ele.pr_image %>" alt="" width="100"></td>
+                        <td><%= ele?.pr_price %></td>
+                        
                         <td>
-                          <a href="/api/subCategory/delete/<%= ele._id %>" class="btn btn-outline-danger">delete</a>
-                          <a href="/updateSubCategory?id=<%= ele._id %>" class="btn btn-outline-warning">Update</a>
+                          <a href="/api/product/delete/<%= ele._id %>" class="btn btn-outline-danger">delete</a>
+                          <a href="/updateProduct?id=<%= ele._id %>" class="btn btn-outline-warning">Update</a>
                         </td>
                       </tr>
                       <% }) %>

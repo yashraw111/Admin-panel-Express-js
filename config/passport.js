@@ -6,7 +6,7 @@ module.exports =  (passport) =>{
     passport.use(new  LocalStrategy(async(email,passport,done)=>{
         const adminCon = await Admin.findOne({email})
 
-        if(!admin){
+        if(!adminCon){
             return done(null,false,console.log("user not found"))
         }
 

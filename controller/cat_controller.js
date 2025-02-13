@@ -10,18 +10,14 @@ exports.store = async (req, res) => {
       });
     } else {
       await Category.create({ cat_name });
-      res.json({
-        success: true,
-        message: "category added",
-      });
+    
+      res.redirect('/viewCategory')
+
+    
     }
   } catch (err) {
-    // console.log(err);
-    var error = err._message
-    res.json({
-      success:true,
-      error
-    })
+    console.log(err);
+   
   }
 };
 exports.trash=async(req,res)=>{
