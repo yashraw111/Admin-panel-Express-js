@@ -1,9 +1,10 @@
 const router = require("express").Router();
-const product =require('../model/product.model')
+const product = require("../model/product.model");
 const Admin = require("../model/admin.model");
 const categoryModel = require("../model/catModel");
 const subCategoryModel = require("../model/subCategory.model");
 const { accessPage } = require("../utils/AccessPage");
+const SubCategory = require("../model/subCategory.model");
 router.get("/", (req, res) => {
   // console.log(req.cookies);
   accessPage(req, res, "pages/index");
@@ -48,34 +49,48 @@ router.get("/addProduct", async (req, res) => {
   const categories = await categoryModel.find();
   var subCategories;
   var { cat_id } = req?.query;
-  var selectedCategory = req.query.cat_id || ""
+  var selectedCategory = req.query.cat_id || "";
   if (cat_id) {
     subCategories = await subCategoryModel.find({ cat_name: cat_id });
   }
   // const subcategories = await subCategoryModel.find().populate("cat_name")
-  res.render("pages/addProduct", { categories, subCategories,selectedCategory });
+  res.render("pages/addProduct", {
+    categories, 
+    subCategories,
+    selectedCategory,
+  });
 });
 
+router.get("/viewProduct", async (req, res) => {
+  const Product = await product
+    .find()
+    .populate("category")
+    .populate("subCategory");
+  res.render("pages/viewProduct", { Product });
+});
 
-router.get('/viewProduct',async(req,res)=>{
-  const Product = await product.find().populate('category').populate('subCategory')
-  res.render("pages/viewProduct",{Product})
-})
+router.get("/updateProduct", async (req, res) => {
+  const { id, cat_id } = req.query;
 
-router.get('/updateProduct',async(req,res)=>{
-  const {id} = req.query
-
-  const SingleProduct = await product.findOne({_id:id}).populate('category').populate('subCategory')
   const categories = await categoryModel.find();
-  var { cat_id } = req?.query;
+  const SingleProduct = await product
+    .findOne({ _id: id })
+    .populate("category")
+    .populate("subCategory");
+  console.log(SingleProduct);
   var subCategories;
-  var selectedCategory = req.query.cat_id || ""
   if (cat_id) {
     subCategories = await subCategoryModel.find({ cat_name: cat_id });
+  } else {
+    subCategories = await SubCategory.find({ category: SingleProduct._id });
   }
   // console.log(id)
-  res.render("pages/updateProduct",{categories,subCategories,selectedCategory,SingleProduct})
-})
+  res.render("pages/updateProduct", {
+    categories,
+    subCategories,
+    SingleProduct,
+  });
+});
 
 router.get("/register", async (req, res) => {
   res.render("pages/register");

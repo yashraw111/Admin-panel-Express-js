@@ -11,7 +11,6 @@
 
     <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
       data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
-
       <%- include('../layout/header') %>
       <%- include('../layout/sidebar') %>
       <% console.log(SingleProduct) %>
@@ -40,16 +39,14 @@
                   <h4 class="card-title text-center mb-4">Add Product</h4>
                   
                   <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/api/product">
-                    
+                    <% console.log("single",SingleProduct) %>
                     <div class="mb-3">
                       <label for="category" class="form-label">Category Name</label>
                       <select name="category" class="form-control" 
-                        onchange="window.location.href=`/addProduct?cat_id=${this.value}`">
-                        <option value="">-- Select Category --</option>
-      <% console.log(categories) %>
-
+                        onchange="window.location.href=`/addProduct?id=<%= SingleProduct._id %> & cat_id=${this.value}`">
+                        <option val ue="">-- Select Category --</option>
                         <% categories.forEach((cat) => { %>
-                        <option value="<%= cat._id %>" <%= cat._id == selectedCategory ? "selected" : "" %> <%= cat?.cat_name == SingleProduct?.category?.cat_name ? "selected" : "" %> >
+                        <option value="<%= cat._id %>"  <%= cat.cat_name == SingleProduct.category.cat_name ? "selected" : "" %> >
                           <%= cat.cat_name %>
                         </option>
                         <% }) %>
