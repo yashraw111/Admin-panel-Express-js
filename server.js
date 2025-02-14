@@ -16,6 +16,7 @@ require("./config/db").dbConnect();
 const View = require("./routes/view.route");
 const Admin = require("./routes/admin.routes");
 const subCategory = require("./routes/subCategory.route");
+const product = require('./routes/product.routes')
 const passport = require("passport");
 const passportAuth = require("./config/passport");
 passportAuth(passport);
@@ -35,6 +36,7 @@ app.use("/api", router);
 app.use("/", View);
 app.use("/api/admin", Admin);
 app.use("/api/subCategory", subCategory);
+app.use("/api/product", product);
 app.listen(PORT, () =>
   console.log(`Example app listening on PORT http://localhost:${PORT}`)
 );

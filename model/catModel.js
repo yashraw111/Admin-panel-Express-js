@@ -7,9 +7,9 @@ const catSchema = new Schema(
       required: true,
       unique: true,
       trim: true,
-    },
+    },  
   },
-  {
+  { 
     timestamps: true,
   }
 );

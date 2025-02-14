@@ -12,7 +12,7 @@ exports.Store = async (req, res) => {
 
 exports.index=async(req,res)=>{
   try{
-    const subCategory=await SubCategory.find().populate('category')
+    const subCategory=await SubCategory.find().c
     res.json(subCategory)
   }catch(err){
     res.json(err)
@@ -31,7 +31,15 @@ exports.delete= async(req,res)=>{
 }
 
 exports.edit=async(req,res)=>{
-  const {id} = req.query
-
-  console.log(id)
+ try {
+   const {id} = req.params
+   // console.log(req.body)
+   const{cat_name,sub_category}= req.body
+   await SubCategory.findByIdAndUpdate({_id:id},{cat_name,sub_category})
+ 
+   res.redirect('/viewSubCategory')
+ } catch (error) {
+  console.log(error)
+  
+ }
 }

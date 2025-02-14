@@ -16,7 +16,7 @@ router.get("/addCategory", (req, res) => {
 
 router.get("/viewCategory", async (req, res) => {
   const category = await categoryModel.find();
-  res.render("pages/viewCategory", { category });
+  res.render("pages/viewCategory", { category }); 
 });
 
 router.get("/updateCategory", async (req, res) => {
@@ -27,16 +27,16 @@ router.get("/updateCategory", async (req, res) => {
 router.get("/AddSubCategory", async (req, res) => {
   // res.render("pages/addCategory");
   const Category = await categoryModel.find();
+  console.log(Category)
   accessPage(req, res, "pages/AddSubCategory", { Category });
 });
 router.get("/viewSubCategory", async (req, res) => {
   // res.render("pages/addCategory");
   const category = await subCategoryModel.find().populate("cat_name");
-  // console.log(category);
+  console.log(category);
   accessPage(req, res, "pages/viewSubCategory", { category });
   console.log(category);
 });
-
 router.get("/updateSubCategory", async (req, res) => {
   const { id } = req.query;
   console.log(id)
@@ -44,7 +44,19 @@ router.get("/updateSubCategory", async (req, res) => {
   const Category = await categoryModel.find()
   res.render("pages/updateSubCategory",{Category,subCategory});
 });
-
+router.get('/addProduct',async(req,res)=>{
+  const categories= await categoryModel.find()
+  var subCategories;
+  var {cat_id}= req?.query
+  if(cat_id){
+    console.log("first")
+    subCategories = await subCategoryModel.find()
+    console.log(subCategories)
+  }
+  console.log(cat_id)
+  const subcategories = await subCategoryModel.find().populate("cat_name")
+  res.render("pages/addProduct",{categories,subcategories})
+})
 router.get("/register", async (req, res) => {
   res.render("pages/register");
 });
