@@ -15,7 +15,11 @@ require("./config/db").dbConnect();
 const View = require("./routes/view.route");
 const Admin = require("./routes/admin.routes");
 const subCategory = require("./routes/subCategory.route");
+<<<<<<< HEAD
 const product = require("./routes/product.routes");
+=======
+const product = require('./routes/product.routes')
+>>>>>>> 335e9b12e88d472bbae50c4f5c2f14c1c9ba61d8
 const passport = require("passport");
 const passportAuth = require("./config/passport");
 passportAuth(passport);

@@ -12,6 +12,11 @@ exports.store = async (req, res) => {
       await Category.create({ cat_name });
     
       res.redirect('/viewCategory')
+<<<<<<< HEAD
+=======
+
+    
+>>>>>>> 335e9b12e88d472bbae50c4f5c2f14c1c9ba61d8
     }
   } catch (err) {
     console.log(err);
