@@ -14,7 +14,7 @@ module.exports =  (passport) =>{
         if(!match){
             return done(null,false,console.log("wrong password"))
         }
-        return done(null,admin)
+        return done(null,adminCon)
     }));
 
     passport.serializeUser((user,done)=>{

@@ -6,7 +6,6 @@ const cookieParser = require("cookie-parser");
 app.use("/profile", express.static("uploads"));
 const flash = require("express-flash");
 const session = require("express-session");
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.use(express.json());

@@ -69,6 +69,7 @@ router.get("/viewProduct", async (req, res) => {
   res.render("pages/viewProduct", { Product });
 });
 
+
 router.get("/updateProduct", async (req, res) => {
   const { id, cat_id } = req.query;
 
@@ -77,20 +78,26 @@ router.get("/updateProduct", async (req, res) => {
     .findOne({ _id: id })
     .populate("category")
     .populate("subCategory");
-  console.log(SingleProduct);
-  var subCategories;
+
+  let subCategories;
   if (cat_id) {
     subCategories = await subCategoryModel.find({ cat_name: cat_id });
   } else {
-    subCategories = await SubCategory.find({ category: SingleProduct._id });
+    subCategories = await subCategoryModel.find({ cat_name: SingleProduct.category?._id });
   }
-  // console.log(id)
+
+  const selectCat = cat_id || SingleProduct.category?._id.toString();
+
   res.render("pages/updateProduct", {
     categories,
     subCategories,
     SingleProduct,
+    selectCat,
   });
-});
+}); 
+
+
+
 
 router.get("/register", async (req, res) => {
   res.render("pages/register");

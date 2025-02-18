@@ -12,8 +12,6 @@ exports.store = async (req, res) => {
       await Category.create({ cat_name });
     
       res.redirect('/viewCategory')
-
-    
     }
   } catch (err) {
     console.log(err);
