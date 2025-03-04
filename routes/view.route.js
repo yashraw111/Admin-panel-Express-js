@@ -31,7 +31,7 @@ router.get("/AddSubCategory", verifyUser, async (req, res) => {
   // res.render("pages/addCategory");
   const Category = await categoryModel.find();
   console.log(Category);
-  accessPage(req, res, "pages/AddSubCategory", { Category });
+  accessPage(req, res, "pages/addSubCategory", { Category });
 });
 router.get("/viewSubCategory", verifyUser, async (req, res) => {
   // res.render("pages/addCategory");

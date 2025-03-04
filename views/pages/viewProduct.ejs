@@ -48,6 +48,7 @@
                   </thead>
                   <tbody>
                     <% Product.forEach((ele,index)=>{ %> 
+                      <% console.log(ele) %>
                       <tr>
                         <td><%= index+1  %></td>
                         <td><%= ele?.category?.cat_name %></td>
