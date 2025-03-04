@@ -55,7 +55,7 @@ app.use(async (req, res, next) => {
   try {
     const verifyToken = jwt.verify(token, "mykey");
     const SingleAdmin = await AdminModel.findById(verifyToken.id);
-    console.log("single", SingleAdmin);
+    // console.log("single", SingleAdmin);
     res.locals.req = req;
     res.locals.res = res;
     res.locals.SingleAdmin = SingleAdmin;

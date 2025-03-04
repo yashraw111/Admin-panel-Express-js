@@ -41,24 +41,28 @@
                       <th scope="col">Product name</th>
                       <th scope="col">Product price</th>
                       <th scope="col">View Image</th>
-                      <th scope="col">Action</th>
+                      <% if(SingleAdmin.role_id == 1){ %>
+                        <th scope="col">Action</th>
+                        <%  } %>
                     </tr>
                   </thead>
                   <tbody>
                     <% Product.forEach((ele,index)=>{ %> 
-                      <% console.log(ele) %>
                       <tr>
                         <td><%= index+1  %></td>
-                        <td><%= ele?.category?.cat_name?.category %></td>
+                        <td><%= ele?.category?.cat_name %></td>
                         <td><%= ele?.subCategory?.sub_category %></td>
                         <td><%= ele?.pr_name %></td>
                         <td><img src="profile/product/<%= ele.pr_image %>" alt="" width="100"></td>
                         <td><%= ele?.pr_price %></td>
                         
-                        <td>
-                          <a href="/api/product/delete/<%= ele._id %>" class="btn btn-outline-danger">delete</a>
-                          <a href="/updateProduct?id=<%= ele._id %>" class="btn btn-outline-warning">Update</a>
-                        </td>
+                       
+                        <% if(SingleAdmin.role_id == 1){ %>
+                          <td>
+                            <a href="/api/product/delete/<%= ele._id %>" class="btn btn-outline-danger">delete</a>
+                            <a href="/updateProduct?id=<%= ele._id %>" class="btn btn-outline-warning">Update</a>
+                          </td>
+                          <%  } %>
                       </tr>
                       <% }) %>
                   </tbody>

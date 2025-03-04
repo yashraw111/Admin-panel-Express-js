@@ -38,7 +38,9 @@
                       <th scope="col">#</th>
                       <th scope="col">Category name</th>
                       <th scope="col">Sub category</th>
-                      <th scope="col">Action</th>
+                      <% if(SingleAdmin.role_id == 1){ %>
+                        <th scope="col">Action</th>
+                        <%  } %>
                     </tr>
                   </thead>
                   <tbody>
@@ -47,10 +49,13 @@
                         <td><%= index+1  %></td>
                         <td><%= ele?.cat_name?.cat_name %></td>
                         <td><%= ele?.sub_category %></td>
-                        <td>
-                          <a href="/api/subCategory/delete/<%= ele._id %>" class="btn btn-outline-danger">delete</a>
-                          <a href="/updateSubCategory?id=<%= ele._id %>" class="btn btn-outline-warning">Update</a>
-                        </td>
+                       
+                        <% if(SingleAdmin.role_id == 1){ %>
+                          <td>
+                            <a href="/api/subCategory/delete/<%= ele._id %>" class="btn btn-outline-danger">delete</a>
+                            <a href="/updateSubCategory?id=<%= ele._id %>" class="btn btn-outline-warning">Update</a>
+                          </td>
+                          <%  } %>
                       </tr>
                       <% }) %>
                   </tbody>

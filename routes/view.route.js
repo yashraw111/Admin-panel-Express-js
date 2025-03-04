@@ -6,6 +6,7 @@ const subCategoryModel = require("../model/subCategory.model");
 const { accessPage } = require("../utils/AccessPage");
 const SubCategory = require("../model/subCategory.model");
 const { verifyUser, isUser } = require("../utils/auth");
+const jwt = require("jsonwebtoken");
 router.get("/", verifyUser, (req, res) => {
   // console.log(req.cookies);
   res.render("pages/index");
@@ -90,7 +91,7 @@ router.get("/updateProduct", verifyUser, async (req, res) => {
 
   const selectCat = cat_id || SingleProduct.category?._id.toString();
 
-  res.render("pages/updateProduct", verifyUser, {
+  res.render("pages/updateProduct", {
     categories,
     subCategories,
     SingleProduct,
@@ -109,11 +110,12 @@ router.get("/logout", async (req, res) => {
   res.redirect("/");
 });
 
-router.get("/changePass", (req, res) => {
-  const email = req.cookies.admin.email;
-  // console.log(email);
+router.get("/changePass", async(req, res) => {
+  const token = req.cookies.admin;
+  const verifyToken =  jwt.verify(token,"mykey")
 
-  res.render("pages/changePassword", { email });
+  const email = await Admin.findById(verifyToken.id)
+  res.render("pages/changePassword",{email});
 });
 
 router.get("/myprofile",verifyUser, async (req, res) => {
@@ -122,7 +124,6 @@ router.get("/myprofile",verifyUser, async (req, res) => {
   const {id }=req?.user
   // console.log(id)
   const SingleAdmin = await Admin.findById(id);
-  // console.log(SingleAdmin);
   res.render("pages/MyProfile", { admin: SingleAdmin });
 });
 

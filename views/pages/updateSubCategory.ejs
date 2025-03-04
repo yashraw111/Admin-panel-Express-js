@@ -11,9 +11,7 @@
     <div id="main-wrapper">
 <%- include('../layout/header') %>
 <%- include('../layout/sidebar') %>
-<% console.log(subCategory) %>
-<% console.log(Category) %>
-      <div class="page-wrapper">
+    <div class="page-wrapper">
         <div class="page-breadcrumb">
         </div>
         <form class="form-horizontal" method="post" action="/api/subCategory/edit/<%= subCategory._id %>">
