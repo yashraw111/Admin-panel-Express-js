@@ -1,22 +1,13 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="en">
-<<<<<<< HEAD
   <%- include('../layout/headSection') %>
   <body>
-=======
-    <%- include('../layout/headSection') %>
-
-  <body>
-
-
->>>>>>> 335e9b12e88d472bbae50c4f5c2f14c1c9ba61d8
     <div class="preloader">
       <div class="lds-ripple">
         <div class="lds-pos"></div>
         <div class="lds-pos"></div>
       </div>
     </div>
-<<<<<<< HEAD
     <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
       data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
       <%- include('../layout/header') %>
@@ -90,118 +81,10 @@
                       <button class="btn btn-primary px-4">Submit</button>
                     </div>
 
-=======
-
-
-    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
-      data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
-
-      <%- include('../layout/header') %>
-      <%- include('../layout/sidebar') %>
-
-
-
-
-          <div class="page-wrapper">
-
-
-            <div class="page-breadcrumb">
-              <div class="row">
-                <div class="col-12 d-flex no-block align-items-center">
-                  <div class="ms-auto text-end">
-                    <nav aria-label="breadcrumb">
-                      <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">
-                          Add
-                        </li>
-                      </ol>
-                    </nav>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-
-
-            <div class="container-fluid">
-
-              <div class="container">
-
-                <div class="row">
-                  <form class="form-horizontal" method="post" enctype="multipart/form-data" action="/api/product">
-                    <div class="card-body">
-                      <h4 class="card-title"> Add Product</h4>
-
-                      <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-end control-label col-form-label">Category
-                          Name</label>
-                        <div class="col-sm-9">
-                          <select name="category" id="" class="form-select" onchange="window.location.href=`/addProduct?cat_id=${this.value}`">
-                            <option value="">--select category--</option>
-                            <% categories.forEach((cat)=>{ %>
-                              <option value="<%=cat._id%>">
-                                <%=cat.cat_name %>
-                              </option>
-                              <% }) %>
-                          </select>
-                        </div>
-                      </div>
-
-                      <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-end control-label col-form-label">Sub Category
-                          Name</label>
-                        <div class="col-sm-9">
-                          <select name="category" id="" class="form-select">
-                            <option value="">--select category--</option>
-                            <% subcategories.forEach((cat)=>{ %>
-                              <option value="<%=cat._id%>">
-                                <%=cat.sub_category %>
-                              </option>
-                              <% }) %>
-                          </select>
-                        </div>
-                      </div>
-
-
-                     
-                      <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-end control-label col-form-label">Product
-                          Name</label>
-                        <div class="col-sm-9">
-                          <input type="text" class="form-control" id="fname" name="pr_name"
-                            placeholder="Product Name Here" />
-                        </div>
-                      </div>
-
-                      <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-end control-label col-form-label">Product
-                          Price</label>
-                        <div class="col-sm-9">
-                          <input type="text" class="form-control" id="fname" name="pr_price"
-                            placeholder="Product Price Here" />
-                        </div>
-                      </div>
-
-                      <div class="form-group row">
-                        <label for="fname" class="col-sm-3 text-end control-label col-form-label">Product
-                          image</label>
-                        <div class="col-sm-9">
-                          <input type="file" class="form-control" id="fname" name="pr_image" />
-                        </div>
-                      </div>
-                      <div class="border-top">
-                        <div class="card-body">
-                          <button class="btn btn-primary">Submit</button>
-                        </div>
-                      </div>
->>>>>>> 335e9b12e88d472bbae50c4f5c2f14c1c9ba61d8
                   </form>
                 </div>
               </div>
             </div>
-<<<<<<< HEAD
           </div>
         </div>
 
@@ -215,15 +98,3 @@
     <%- include('../layout/jsLink') %>
   </body>
 </html>
-=======
-            <footer class="footer text-center">
-              All Rights Reserved by Matrix-admin. Designed and Developed by
-              <a href="https://www.wrappixel.com">WrapPixel</a>.
-            </footer>
-          </div>
-    </div>
-    <%- include('../layout/jsLink') %>
-  </body>
-
-</html>
->>>>>>> 335e9b12e88d472bbae50c4f5c2f14c1c9ba61d8

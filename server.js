@@ -2,8 +2,11 @@ const express = require("express");
 const app = express();
 const PORT = 8000;
 app.set("view engine", "ejs");
+const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 app.use("/profile", express.static("uploads"));
+app.use("/profile", express.static("uploads/admin"));
+
 const flash = require("express-flash");
 const session = require("express-session");
 app.use(express.urlencoded({ extended: true }));
@@ -15,13 +18,10 @@ require("./config/db").dbConnect();
 const View = require("./routes/view.route");
 const Admin = require("./routes/admin.routes");
 const subCategory = require("./routes/subCategory.route");
-<<<<<<< HEAD
 const product = require("./routes/product.routes");
-=======
-const product = require('./routes/product.routes')
->>>>>>> 335e9b12e88d472bbae50c4f5c2f14c1c9ba61d8
 const passport = require("passport");
 const passportAuth = require("./config/passport");
+const AdminModel = require("./model/admin.model");
 passportAuth(passport);
 app.use(
   session({
@@ -30,16 +30,45 @@ app.use(
     saveUninitialized: true,
   })
 );
+
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(cookieParser());
+
 app.use("/api", router);
-app.use("/", View);
 app.use("/api/admin", Admin);
 app.use("/api/subCategory", subCategory);
 app.use("/api/product", product);
+
+app.use(async (req, res, next) => {
+  if (req.path === "/login" || req.path === "/register") {
+    return next();
+  }
+
+  const token = req.cookies.admin;
+  if (!token) {
+    return res.redirect("/login");
+  }
+
+  try {
+    const verifyToken = jwt.verify(token, "mykey");
+    const SingleAdmin = await AdminModel.findById(verifyToken.id);
+    console.log("single", SingleAdmin);
+    res.locals.req = req;
+    res.locals.res = res;
+    res.locals.SingleAdmin = SingleAdmin;
+    next();
+  } catch (error) {
+    console.log(error);
+    res.clearCookie("admin"); // Agar token invalid hai, to cookie hatao
+    return res.redirect("/login");
+  }
+});
+app.use("/", View);
+
+
 app.listen(PORT, () =>
   console.log(`Example app listening on PORT http://localhost:${PORT}`)
 );

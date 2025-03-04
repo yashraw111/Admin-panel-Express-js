@@ -46,9 +46,10 @@
                   </thead>
                   <tbody>
                     <% Product.forEach((ele,index)=>{ %> 
+                      <% console.log(ele) %>
                       <tr>
                         <td><%= index+1  %></td>
-                        <td><%= ele?.category?.cat_name %></td>
+                        <td><%= ele?.category?.cat_name?.category %></td>
                         <td><%= ele?.subCategory?.sub_category %></td>
                         <td><%= ele?.pr_name %></td>
                         <td><img src="profile/product/<%= ele.pr_image %>" alt="" width="100"></td>

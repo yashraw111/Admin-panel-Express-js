@@ -2,6 +2,7 @@ const Admin = require("../model/admin.model");
 const { plainToHash, hashToPlain } = require("../utils/password");
 const sendEmail = require("../config/sendMail");
 const otpGenerator = require("otp-generator");
+const jwt = require('jsonwebtoken')
 const Register = async (req, res) => {
   console.log(req.body);
   try {
@@ -28,27 +29,32 @@ const Register = async (req, res) => {
   }
 };
 const login = async (req, res) => {
-  const { email, password } = req.body;
-  const existEmail = await Admin.findOne({ email }).countDocuments().exec();
-  // console.log(existEmail);
-
-  if (existEmail > 0) {
-    const admin = await Admin.findOne({ email });
-    // console.log(admin);
-
-    const match_pass = await hashToPlain(password, admin.password);
-    if (match_pass) {
-      const payload = {
-        username: admin.userName,
-        email: admin.email,
-      };
-      res.cookie("admin", payload, { httpOnly: true });
-      res.redirect("/");
+  try {
+    const { email, password } = req.body;
+    const existEmail = await Admin.findOne({ email }).countDocuments().exec();
+    // console.log(existEmail);
+  
+    if (existEmail > 0) {
+      const admin = await Admin.findOne({ email });
+      // console.log(admin);
+  
+      const match_pass = await hashToPlain(password, admin.password);
+      if (match_pass) {
+        const payload = {
+          id:admin._id,
+          role_id:admin.role_id
+        };
+        const token = jwt.sign(payload,"mykey",{expiresIn:"1h"})
+        res.cookie("admin", token, { httpOnly: true });
+        res.redirect("/");
+      } else {
+        res.json("password not Match ");
+      }
     } else {
-      res.json("password not Match ");
+      res.json("email is not exist");
     }
-  } else {
-    res.json("email is not exist");
+  } catch (error) {
+    console.log(error)
   }
 };
 const updateProfile = async (req, res) => {
