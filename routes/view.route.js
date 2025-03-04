@@ -5,13 +5,13 @@ const categoryModel = require("../model/catModel");
 const subCategoryModel = require("../model/subCategory.model");
 const { accessPage } = require("../utils/AccessPage");
 const SubCategory = require("../model/subCategory.model");
-const { verifyUser, isUser, isAdmin } = require("../utils/auth");
-router.get("/", verifyUser,isAdmin, (req, res) => {
+const { verifyUser, isUser } = require("../utils/auth");
+router.get("/", verifyUser, (req, res) => {
   // console.log(req.cookies);
   res.render("pages/index");
 });
 
-router.get("/addCategory", verifyUser, isAdmin, (req, res) => {
+router.get("/addCategory", verifyUser, (req, res) => {
   // res.render("pages/addCategory");
   res.render("pages/addCategory");
 });
@@ -21,32 +21,32 @@ router.get("/viewCategory", verifyUser, async (req, res) => {
   res.render("pages/viewCategory", { category });
 });
 
-router.get("/updateCategory", verifyUser, isAdmin, async (req, res) => {
+router.get("/updateCategory", verifyUser, async (req, res) => {
   const { id } = req.query;
   const category = await categoryModel.findById(id);
   res.render("pages/updateCategory", { category });
 });
-router.get("/AddSubCategory", verifyUser, isAdmin, async (req, res) => {
+router.get("/AddSubCategory", verifyUser, async (req, res) => {
   // res.render("pages/addCategory");
   const Category = await categoryModel.find();
   console.log(Category);
   accessPage(req, res, "pages/AddSubCategory", { Category });
 });
-router.get("/viewSubCategory", verifyUser, isAdmin, async (req, res) => {
+router.get("/viewSubCategory", verifyUser, async (req, res) => {
   // res.render("pages/addCategory");
   const category = await subCategoryModel.find().populate("cat_name");
   console.log(category);
   accessPage(req, res, "pages/viewSubCategory", { category });
   console.log(category);
 });
-router.get("/updateSubCategory", verifyUser, isAdmin, async (req, res) => {
+router.get("/updateSubCategory", verifyUser, async (req, res) => {
   const { id } = req.query;
   console.log(id);
   const subCategory = await subCategoryModel.findById(id).populate("cat_name");
   const Category = await categoryModel.find();
   res.render("pages/updateSubCategory", { Category, subCategory });
 });
-router.get("/addProduct", verifyUser, isAdmin, async (req, res) => {
+router.get("/addProduct", verifyUser, async (req, res) => {
   const categories = await categoryModel.find();
   var subCategories;
   var { cat_id } = req?.query;
@@ -62,7 +62,7 @@ router.get("/addProduct", verifyUser, isAdmin, async (req, res) => {
   });
 });
 
-router.get("/viewProduct", verifyUser, isAdmin, async (req, res) => {
+router.get("/viewProduct", verifyUser, async (req, res) => {
   const Product = await product
     .find()
     .populate("category")
@@ -70,7 +70,7 @@ router.get("/viewProduct", verifyUser, isAdmin, async (req, res) => {
   res.render("pages/viewProduct", { Product });
 });
 
-router.get("/updateProduct", verifyUser, isAdmin, async (req, res) => {
+router.get("/updateProduct", verifyUser, async (req, res) => {
   const { id, cat_id } = req.query;
 
   const categories = await categoryModel.find();
@@ -90,7 +90,7 @@ router.get("/updateProduct", verifyUser, isAdmin, async (req, res) => {
 
   const selectCat = cat_id || SingleProduct.category?._id.toString();
 
-  res.render("pages/updateProduct", verifyUser, isAdmin, {
+  res.render("pages/updateProduct", verifyUser, {
     categories,
     subCategories,
     SingleProduct,
